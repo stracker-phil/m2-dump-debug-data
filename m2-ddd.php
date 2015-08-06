@@ -111,7 +111,7 @@ class M2_DDD {
 
 		$dump = var_export( $data, true );
 		$bytes = strlen( $dump );
-		$download_url = self::compress_data( $dump );
+		$download_url = self::compress_data( $data );
 
 		printf(
 			'<p>Total Size: <b>%s</b> | Items included: <b>%s</b> %s</p>',
@@ -192,7 +192,25 @@ class M2_DDD {
 				return false;
 			}
 
-			$zip->addFromString( 'dump.txt', $data );
+			$zip->addFromString(
+				'dump/info.txt',
+				sprintf(
+					"Date: %s\nSite: %s\nFilter: %s",
+					date( 'Y-m-d H:i:s' ),
+					get_site_url(),
+					http_build_query( $_POST )
+				)
+			);
+
+			$zip->addFromString(
+				'dump/data.log',
+				var_export( $data, true )
+			);
+
+			$zip->addFromString(
+				'dump/data.json',
+				json_encode( $data )
+			);
 
 			$zip->close();
 
