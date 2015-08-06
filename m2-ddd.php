@@ -117,7 +117,7 @@ class M2_DDD {
 			'<p>Total Size: <b>%s</b> | Items included: <b>%s</b> %s</p>',
 			intval( $bytes / 10.12 ) / 100 . ' kB',
 			$count,
-			( $download_url ? '| <a href="' . $download_url . '">Download</a>' : '' )
+			( $download_url ? '| <a href="' . $download_url . '">Download as Zip Archive</a>' : '' )
 		);
 		echo '<textarea style="width: 100%;min-height: 320px;font: 12px monospace" readonly="readonly">';
 		echo esc_textarea( $dump );
